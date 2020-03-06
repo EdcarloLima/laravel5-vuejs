@@ -45703,7 +45703,7 @@ exports = module.exports = __webpack_require__(46)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -45758,30 +45758,72 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "TabelaLista"
+    name: "TabelaLista",
+    props: ['titulos', 'itens', 'ordem', 'ordemcol', 'criar', 'detalhe', 'editar', 'deletar', 'token'],
+    data: function data() {
+        return {
+            buscar: '',
+            ordemAux: this.ordem || 'asc',
+            ordemAuxCol: this.ordemcol || 0
+        };
+    },
+    methods: {
+        executaForm: function executaForm(index) {
+            document.getElementById(index).submit();
+        },
+        ordenaColuna: function ordenaColuna(coluna) {
+            this.ordemAuxCol = coluna;
+            if (this.ordemAux.toLowerCase() === 'asc') {
+                this.ordemAux = 'desc';
+            } else {
+                this.ordemAux = 'asc';
+            }
+        }
+    },
+    computed: {
+        lista: function lista() {
+            var _this = this;
+
+            var ordem = this.ordemAux;
+            var ordemCol = this.ordemAuxCol;
+            ordem = ordem.toLowerCase();
+            ordemCol = parseInt(ordemCol);
+
+            if (ordem === 'asc') {
+                this.itens.sort(function (a, b) {
+                    if (a[ordemCol] > b[ordemCol]) {
+                        return 1;
+                    }
+                    if (a[ordemCol] < b[ordemCol]) {
+                        return -1;
+                    }
+                    return 0;
+                });
+            } else {
+                this.itens.sort(function (a, b) {
+                    if (a[ordemCol] < b[ordemCol]) {
+                        return 1;
+                    }
+                    if (a[ordemCol] > b[ordemCol]) {
+                        return -1;
+                    }
+                    return 0;
+                });
+            }
+
+            return this.itens.filter(function (res) {
+                for (var k = 0; k < res.length; k++) {
+                    if ((res[k] + '').toLowerCase().indexOf(_this.buscar.toLowerCase()) >= 0) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+            return this.itens;
+        }
+    }
 });
 
 /***/ }),
@@ -45792,110 +45834,178 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("a", { attrs: { href: "#" } }, [_vm._v("Criar")]),
+  return _c("div", [
+    _c("div", { staticClass: "form-inline" }, [
+      _vm.criar
+        ? _c("a", { attrs: { href: _vm.criar } }, [_vm._v("Criar")])
+        : _vm._e(),
       _vm._v(" "),
-      _c("table", { staticClass: "table table-striped table-hover" }, [
-        _c("thead", [
-          _c("tr", [
-            _c("th", [_vm._v("#")]),
-            _vm._v(" "),
-            _c("th", [_vm._v("Título")]),
-            _vm._v(" "),
-            _c("th", [_vm._v("Descrição")]),
-            _vm._v(" "),
-            _c("th", [_vm._v("Autor")]),
-            _vm._v(" "),
-            _c("th", [_vm._v("Data")]),
-            _vm._v(" "),
-            _c("th", [_vm._v("Ação")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("tbody", [
-          _c("tr", [
-            _c("td", [_vm._v("1")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Primeiro Artigo")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Artigo sobre alguma coisa")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Carlos Alberto")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("12/03/2020")]),
-            _vm._v(" "),
-            _c("td", [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Editar")]),
-              _vm._v(" |\n                "),
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Deletar")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [_vm._v("2")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Segundo Artigo")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Artigo sobre outra coisa")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Carlos Alberto")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("14/03/2020")]),
-            _vm._v(" "),
-            _c("td", [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Editar")]),
-              _vm._v(" |\n                "),
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Deletar")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [_vm._v("3")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Terceiro Artigo")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Artigo sobre novidades")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Carlos Alberto")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("15/03/2020")]),
-            _vm._v(" "),
-            _c("td", [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Editar")]),
-              _vm._v(" |\n                "),
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Deletar")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [_vm._v("4")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Quarto Artigo")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Artigo sobre tecnologia")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Carlos Alberto")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("16/03/2020")]),
-            _vm._v(" "),
-            _c("td", [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Editar")]),
-              _vm._v(" |\n                "),
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Deletar")])
-            ])
-          ])
-        ])
+      _c("div", { staticClass: "form-group pull-right" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.buscar,
+              expression: "buscar"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "search", placeholder: "Buscar" },
+          domProps: { value: _vm.buscar },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.buscar = $event.target.value
+            }
+          }
+        })
       ])
+    ]),
+    _vm._v(" "),
+    _c("table", { staticClass: "table table-striped table-hover" }, [
+      _c("thead", [
+        _c(
+          "tr",
+          [
+            _vm._l(_vm.titulos, function(titulo, index) {
+              return _c(
+                "th",
+                {
+                  staticStyle: { cursor: "pointer" },
+                  on: {
+                    click: function($event) {
+                      return _vm.ordenaColuna(index)
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(titulo))]
+              )
+            }),
+            _vm._v(" "),
+            _vm.detalhe || _vm.editar || _vm.deletar
+              ? _c("th", [_vm._v("Ação")])
+              : _vm._e()
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.lista, function(item, index) {
+          return _c(
+            "tr",
+            [
+              _vm._l(item, function(i) {
+                return _c("td", [_vm._v(_vm._s(i))])
+              }),
+              _vm._v(" "),
+              _vm.detalhe || _vm.editar || _vm.deletar
+                ? _c("td", [
+                    _vm.deletar && _vm.token
+                      ? _c(
+                          "form",
+                          {
+                            attrs: {
+                              id: index,
+                              action: _vm.deletar,
+                              method: "post"
+                            }
+                          },
+                          [
+                            _c("input", {
+                              attrs: {
+                                type: "hidden",
+                                name: "_method",
+                                value: "DELETE"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: { type: "hidden", name: "_token" },
+                              domProps: { value: _vm.token }
+                            }),
+                            _vm._v(" "),
+                            _vm.editar
+                              ? _c("a", { attrs: { href: _vm.editar } }, [
+                                  _vm._v("Editar |")
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.detalhe
+                              ? _c("a", { attrs: { href: _vm.detalhe } }, [
+                                  _vm._v("Detalhe |")
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.executaForm(index)
+                                  }
+                                }
+                              },
+                              [_vm._v("Deletar |")]
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.token
+                      ? _c("span", [
+                          _vm.editar
+                            ? _c("a", { attrs: { href: _vm.editar } }, [
+                                _vm._v("Editar |")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.detalhe
+                            ? _c("a", { attrs: { href: _vm.detalhe } }, [
+                                _vm._v("Detalhe |")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.deletar
+                            ? _c("a", { attrs: { href: _vm.deletar } }, [
+                                _vm._v("Deletar |")
+                              ])
+                            : _vm._e()
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.token && !_vm.deletar
+                      ? _c("span", [
+                          _vm.editar
+                            ? _c("a", { attrs: { href: _vm.editar } }, [
+                                _vm._v("Editar |")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.detalhe
+                            ? _c("a", { attrs: { href: _vm.detalhe } }, [
+                                _vm._v("Detalhe |")
+                              ])
+                            : _vm._e()
+                        ])
+                      : _vm._e()
+                  ])
+                : _vm._e()
+            ],
+            2
+          )
+        }),
+        0
+      )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
