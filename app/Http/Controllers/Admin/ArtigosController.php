@@ -14,7 +14,11 @@ class ArtigosController extends Controller
      */
     public function index()
     {
-        return response()->view('admin.artigos.index', compact(''));
+        $listaMigalhas = json_encode([
+            ["titulo" => "Home", "url" => route('home')],
+            ["titulo" => "lista de Compras", "url" => ""]
+        ]);
+        return response()->view('admin.artigos.index', compact('listaMigalhas'));
     }
 
     /**
