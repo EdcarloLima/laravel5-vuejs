@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Artigo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,11 +19,8 @@ class ArtigosController extends Controller
             ["titulo" => "Home", "url" => route('home')],
             ["titulo" => "Lista de Artigos", "url" => ""]
         ]);
-
-        $listaArtigos = json_encode([
-            ["id" => 1,"titulo" => "PHP OO", "descricao" => "Curso de PHP OO"],
-            ["id" => 2,"titulo" => "Vue JS", "descricao" => "Curso de Vue JS"]
-        ]);
+        $artigo = new Artigo();
+        $listaArtigos = json_encode($artigo->select('id','titulo','descricao','data')->get());
         return response()->view('admin.artigos.index', compact('listaMigalhas','listaArtigos'));
     }
 
@@ -44,7 +42,19 @@ class ArtigosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $artigo = new Artigo();
+        $dados = $request->all();
+        $validacao = \Validator::make($dados,[
+            "titulo" => "required",
+            "descricao" => "required",
+            "conteudo" => "required",
+            "data" => "required",
+        ]);
+        if ($validacao->fails()) {
+            return redirect()->back()->withErrors($validacao)->withInput();
+        }
+        $artigo->create($dados);
+        return response()->redirectToRoute('artigos.index');
     }
 
     /**
@@ -55,7 +65,10 @@ class ArtigosController extends Controller
      */
     public function show($id)
     {
-        //
+        $artigo = new Artigo();
+        $artigo = $artigo->find($id);
+        $artigo->data = $artigo->getDateFormatLocal($artigo->data);
+        return $artigo;
     }
 
     /**
