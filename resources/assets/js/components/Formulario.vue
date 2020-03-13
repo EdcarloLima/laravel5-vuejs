@@ -21,12 +21,11 @@
                     return this.method.toLowerCase();
                 }
                 if (this.method.toLowerCase() === "put") {
-                    return this.alteraMethod = "put";
+                    this.alteraMethod = "put";
                 }
                 if (this.method.toLowerCase() === "delete") {
-                    return this.alteraMethod = "delete";
+                    this.alteraMethod = "delete";
                 }
-
                 return "post";
             }
         }

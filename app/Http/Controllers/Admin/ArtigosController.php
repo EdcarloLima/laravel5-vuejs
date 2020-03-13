@@ -20,7 +20,7 @@ class ArtigosController extends Controller
             ["titulo" => "Lista de Artigos", "url" => ""]
         ]);
         $artigo = new Artigo();
-        $listaArtigos = json_encode($artigo->select('id','titulo','descricao','data')->get());
+        $listaArtigos = $artigo->select('id','titulo','descricao','data')->paginate(2);
         return response()->view('admin.artigos.index', compact('listaMigalhas','listaArtigos'));
     }
 
@@ -91,7 +91,19 @@ class ArtigosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $artigo = new Artigo();
+        $dados = $request->all();
+        $validacao = \Validator::make($dados,[
+            "titulo" => "required",
+            "descricao" => "required",
+            "conteudo" => "required",
+            "data" => "required",
+        ]);
+        if ($validacao->fails()) {
+            return redirect()->back()->withErrors($validacao)->withInput();
+        }
+        $artigo->find($id)->update($dados);
+        return response()->redirectToRoute('artigos.index');
     }
 
     /**
@@ -102,6 +114,8 @@ class ArtigosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $artigo = new Artigo();
+        $artigo->find($id)->delete();
+        return response()->redirectToRoute('artigos.index');
     }
 }

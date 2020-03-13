@@ -2,7 +2,7 @@
 
 @section('content')
     <pagina tamanho="12">
-        @if($errors->all())
+        @if ($errors->all())
             <div class="alert alert-danger alert-dismissible text-center" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 @foreach($errors->all() as $key => $value)
@@ -11,16 +11,19 @@
             </div>
         @endif
         <painel titulo="Lista de Artigos">
-            <migalhas v-bind:lista="{{$listaMigalhas}}"></migalhas>
-
+            <migalhas :lista="{{$listaMigalhas}}"></migalhas>
             <tabela-lista
-                    v-bind:titulos="['#','Título','Descrição','Data']"
-                    v-bind:itens="{{$listaArtigos}}"
+                    :titulos="['#','Título','Descrição','Data']"
+                    :itens="{{json_encode($listaArtigos)}}"
                     ordem="desc" ordemcol="1"
-                    criar="#criar" detalhe="/admin/artigos/" editar="/admin/artigos/" deletar="#deletar" token="{{csrf_token()}}" modal="sim"
+                    criar="#criar" detalhe="/admin/artigos/" editar="/admin/artigos/" deletar="/admin/artigos/" token="{{csrf_token()}}" modal="sim"
             ></tabela-lista>
+            <div align="center">
+                {{$listaArtigos->links()}}
+            </div>
         </painel>
     </pagina>
+
     <modal nome="adicionar" titulo="Adicionar">
         <formulario id="formAdicionar" css="" action="{{route('artigos.store')}}" method="post" enctype="" token="{{csrf_token()}}">
             <div class="form-group">
@@ -46,7 +49,7 @@
     </modal>
 
     <modal nome="editar" titulo="Editar">
-        <formulario id="formEditar" css="" v-bind:action="'/admin/artigos/'+$store.state.item.id" method="put" enctype="multipart/form-data" token="123456">
+        <formulario id="formEditar" :action="'/admin/artigos/'+$store.state.item.id" method="put" enctype="" token="{{csrf_token()}}">
             <div class="form-group">
                 <label for="ed-titulo">Título</label>
                 <input type="text" class="form-control" id="ed-titulo" name="titulo" v-model="$store.state.item.titulo" placeholder="Título">
@@ -56,11 +59,11 @@
                 <input type="text" class="form-control" id="ed-descricao" name="descricao" v-model="$store.state.item.descricao" placeholder="Descrição">
             </div>
             <div class="form-group">
-                <label for="conteudo">Conteúdo</label>
+                <label for="ed-conteudo">Conteúdo</label>
                 <textarea class="form-control" id="ed-conteudo" name="conteudo" v-model="$store.state.item.conteudo"></textarea>
             </div>
             <div class="form-group">
-                <label for="data">Data</label>
+                <label for="ed-data">Data</label>
                 <input type="datetime-local" class="form-control" id="ed-data" name="data" v-model="$store.state.item.data">
             </div>
         </formulario>
@@ -69,7 +72,7 @@
         </span>
     </modal>
 
-    <modal nome="detalhe" v-bind:titulo="$store.state.item.titulo">
+    <modal nome="detalhe" :titulo="$store.state.item.titulo">
         <p>@{{$store.state.item.descricao}}</p>
         <p>@{{$store.state.item.conteudo}}</p>
     </modal>
