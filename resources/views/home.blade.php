@@ -12,7 +12,7 @@
                     <caixa qtd="1500" titulo="Usuários" url="{{route('usuarios.index')}}" cor="blue" icone="ion-person-stalker"></caixa>
                 </div>
                 <div class="col-md-4">
-                    <caixa qtd="3" titulo="Autores" url="#" cor="red" icone="ion ion-person"></caixa>
+                    <caixa qtd="3" titulo="Autores" url="{{route('autores.index')}}" cor="red" icone="ion ion-person"></caixa>
                 </div>
             </div>
         </painel>

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Validation\Rule;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 
-class UsuariosController extends Controller
+class AutoresController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +18,11 @@ class UsuariosController extends Controller
     {
         $listaMigalhas = json_encode([
             ["titulo" => "Home", "url" => route('home')],
-            ["titulo" => "Lista de Usuários", "url" => ""]
+            ["titulo" => "Lista de Autores", "url" => ""]
         ]);
         $usuario = new User();
-        $listaUsuarios = $usuario->select('id','name','email')->paginate(5);
-        return response()->view('admin.usuarios.index', compact('listaMigalhas','listaUsuarios'));
+        $listaAutores = $usuario->select('id','name','email')->where('autor','S')->paginate(5);
+        return response()->view('admin.autores.index', compact('listaMigalhas','listaAutores'));
     }
 
     /**
@@ -55,7 +55,7 @@ class UsuariosController extends Controller
         }
         $dados['password'] = bcrypt($dados['password']);
         $usuario->create($dados);
-        return response()->redirectToRoute('usuarios.index');
+        return response()->redirectToRoute('autores.index');
     }
 
     /**
@@ -111,7 +111,7 @@ class UsuariosController extends Controller
             return redirect()->back()->withErrors($validacao)->withInput();
         }
         $usuario->find($id)->update($dados);
-        return response()->redirectToRoute('usuarios.index');
+        return response()->redirectToRoute('autores.index');
     }
 
     /**
@@ -124,6 +124,6 @@ class UsuariosController extends Controller
     {
         $usuario = new User();
         $usuario->find($id)->delete();
-        return response()->redirectToRoute('usuarios.index');
+        return response()->redirectToRoute('autores.index');
     }
 }
