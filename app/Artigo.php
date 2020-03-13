@@ -17,4 +17,9 @@ class Artigo extends Model
     {
         return str_replace_first(' ','T',$dateTimeLocal);
     }
+
+    public function getQuantidade() : int
+    {
+        return $this->count();
+    }
 }

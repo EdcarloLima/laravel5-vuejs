@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Artigo;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,6 +28,11 @@ class HomeController extends Controller
         $listaMigalhas = json_encode([
             ["titulo" => "Home", "url" => ""]
         ]);
-        return response()->view('home', compact('listaMigalhas'));
+        $artigo = new Artigo();
+        $usuario = new User();
+        $qtdUsuarios = $usuario->count();
+        $qtdAutores = $usuario->where('autor','S')->count();
+        $qtdArtigos = $artigo->getQuantidade();
+        return response()->view('home', compact('listaMigalhas','qtdUsuarios','qtdAutores','qtdArtigos'));
     }
 }
