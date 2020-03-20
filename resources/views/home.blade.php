@@ -3,7 +3,7 @@
 @section('content')
     <pagina tamanho="10">
         <painel titulo="Dashboard">
-            <migalhas v-bind:lista="{{$listaMigalhas}}"></migalhas>
+            <migalhas :lista="{{$listaMigalhas}}"></migalhas>
             <div class="row">
                 <div class="col-md-4">
                     <caixa qtd="{{$qtdArtigos}}" titulo="Artigos" url="{{route('artigos.index')}}" cor="orange" icone="ion ion-pie-graph"></caixa>

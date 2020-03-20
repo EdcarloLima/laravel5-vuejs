@@ -21,7 +21,7 @@ class UsuariosController extends Controller
             ["titulo" => "Lista de Usuários", "url" => ""]
         ]);
         $usuario = new User();
-        $listaUsuarios = $usuario->select('id','name','email')->paginate(5);
+        $listaUsuarios = $usuario->select(['id','name','email'])->paginate(5);
         return response()->view('admin.usuarios.index', compact('listaMigalhas','listaUsuarios'));
     }
 
