@@ -13,6 +13,11 @@ class Artigo extends Model
 
     protected $dates = ['deleted_at'];
 
+    public function user()
+    {
+        return $this->belongsTo('App\User','user_id');
+    }
+
     public function getDateFormatLocal(string $dateTimeLocal) : string
     {
         return str_replace_first(' ','T',$dateTimeLocal);

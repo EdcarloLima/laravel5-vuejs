@@ -31,5 +31,14 @@ class User extends Authenticatable
 
     //protected $dates = ['deleted_at'];
 
+    public function artigos()
+    {
+        return $this->hasMany('App\Artigo');
+    }
 
+    public function getNome(int $userId) : string
+    {
+        $select = $this->select('name')->where('id', $userId)->first();
+        return (!empty($select)) ? $select->name : '';
+    }
 }

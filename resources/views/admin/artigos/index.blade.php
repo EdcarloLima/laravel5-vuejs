@@ -13,7 +13,7 @@
         <painel titulo="Lista de Artigos">
             <migalhas :lista="{{$listaMigalhas}}"></migalhas>
             <tabela-lista
-                    :titulos="['#','Título','Descrição','Data']"
+                    :titulos="['#','Título','Descrição','Autor','Data']"
                     :itens="{{json_encode($listaArtigos)}}"
                     ordem="desc" ordemcol="0"
                     criar="#criar" detalhe="/admin/artigos/" editar="/admin/artigos/" deletar="/admin/artigos/" token="{{csrf_token()}}" modal="sim"

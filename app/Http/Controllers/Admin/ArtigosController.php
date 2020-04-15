@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Artigo;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -20,7 +21,11 @@ class ArtigosController extends Controller
             ["titulo" => "Lista de Artigos", "url" => ""]
         ]);
         $artigo = new Artigo();
-        $listaArtigos = $artigo->select('id','titulo','descricao','data')->paginate(5);
+        $user = new User();
+        $listaArtigos = $artigo->select(['id','titulo','descricao','user_id','data'])->paginate(5);
+        foreach ($listaArtigos as $art) {
+            $art->user_id = $user->getNome($art->user_id);
+        }
         return response()->view('admin.artigos.index', compact('listaMigalhas','listaArtigos'));
     }
 
