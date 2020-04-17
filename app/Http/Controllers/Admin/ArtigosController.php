@@ -21,11 +21,12 @@ class ArtigosController extends Controller
             ["titulo" => "Lista de Artigos", "url" => ""]
         ]);
         $artigo = new Artigo();
-        $user = new User();
+        /*$user = new User();
         $listaArtigos = $artigo->select(['id','titulo','descricao','user_id','data'])->paginate(5);
         foreach ($listaArtigos as $art) {
             $art->user_id = $user->getNome($art->user_id);
-        }
+        }*/
+        $listaArtigos = $artigo->listarArtigos(5);
         return response()->view('admin.artigos.index', compact('listaMigalhas','listaArtigos'));
     }
 

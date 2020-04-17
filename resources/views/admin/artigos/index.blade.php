@@ -35,8 +35,17 @@
                 <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição" value="{{old('descricao')}}">
             </div>
             <div class="form-group">
-                <label for="conteudo">Conteúdo</label>
-                <textarea class="form-control" id="conteudo" name="conteudo">{{old('conteudo')}}</textarea>
+                <label for="addConteudo">Conteúdo</label>
+                <ckeditor
+                        id="addConteudo"
+                        name="conteudo"
+                        value="{{old('conteudo')}}"
+                        :config="{ toolbar: [
+                                        [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript' ]
+                                    ],
+                                    height: 200
+                                 }">
+                </ckeditor>
             </div>
             <div class="form-group">
                 <label for="data">Data</label>
@@ -59,12 +68,21 @@
                 <input type="text" class="form-control" id="ed-descricao" name="descricao" v-model="$store.state.item.descricao" placeholder="Descrição">
             </div>
             <div class="form-group">
-                <label for="ed-conteudo">Conteúdo</label>
-                <textarea class="form-control" id="ed-conteudo" name="conteudo" v-model="$store.state.item.conteudo"></textarea>
+                <label for="editConteudo">Conteúdo</label>
+                <ckeditor
+                        id="editConteudo"
+                        name="conteudo"
+                        v-model="$store.state.item.conteudo"
+                        :config="{ toolbar: [
+                                        [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript' ]
+                                    ],
+                                    height: 200
+                                 }">
+                </ckeditor>
             </div>
             <div class="form-group">
-                <label for="ed-data">Data</label>
-                <input type="datetime-local" class="form-control" id="ed-data" name="data" v-model="$store.state.item.data">
+                <label for="editData">Data</label>
+                <input type="datetime-local" class="form-control" id="editData" name="data" v-model="$store.state.item.data">
             </div>
         </formulario>
         <span slot="botoes">

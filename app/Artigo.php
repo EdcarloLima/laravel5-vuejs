@@ -27,4 +27,12 @@ class Artigo extends Model
     {
         return $this->count();
     }
+
+    public function listarArtigos(int $paginate)
+    {
+        return $this->select(['artigos.id','artigos.titulo','artigos.descricao','users.name','artigos.data'])
+            ->join('users', 'artigos.user_id', 'users.id')
+            ->whereNull('artigos.deleted_at')
+            ->paginate($paginate);
+    }
 }
