@@ -11,14 +11,14 @@
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
+Route::get('/', function () {
+    return view('site');
+});
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/', 'AdminController@index')->name('home');
+Route::get('/admin', 'AdminController@index')->name('admin');
 
 Route::middleware(['auth'])->prefix('admin')->namespace('Admin')->group(function (){
     Route::resource('artigos', 'ArtigosController');

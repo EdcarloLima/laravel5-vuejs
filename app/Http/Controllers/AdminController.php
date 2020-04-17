@@ -6,7 +6,7 @@ use App\Artigo;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class AdminController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,13 +26,13 @@ class HomeController extends Controller
     public function index()
     {
         $listaMigalhas = json_encode([
-            ["titulo" => "Home", "url" => ""]
+            ["titulo" => "Admin", "url" => ""]
         ]);
         $artigo = new Artigo();
         $usuario = new User();
         $qtdUsuarios = $usuario->count();
         $qtdAutores = $usuario->where('autor','S')->count();
         $qtdArtigos = $artigo->getQuantidade();
-        return response()->view('home', compact('listaMigalhas','qtdUsuarios','qtdAutores','qtdArtigos'));
+        return response()->view('admin', compact('listaMigalhas','qtdUsuarios','qtdAutores','qtdArtigos'));
     }
 }
