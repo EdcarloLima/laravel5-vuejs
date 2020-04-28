@@ -42,6 +42,8 @@ import ckeditor from "vue-ckeditor2";
 Vue.component('ckeditor', ckeditor);
 /*Vue.component('ckeditor', require('vue-ckeditor2')); Não funcionou */
 
+Vue.component('artigocard', require('./components/ArtigoCard.vue'));
+
 const app = new Vue({
     el: '#app',
     store,
