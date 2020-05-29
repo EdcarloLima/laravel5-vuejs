@@ -12,7 +12,7 @@
                     autor="{{$value->autor}}"
                     imagem="{{asset('img/coffee-dev.jpg')}}"
                     alt="Transformando café em código"
-                    link=""
+                    link="{{route('artigo',[$value->id,str_slug($value->titulo)])}}"
                     sm="6"
                     md="4"
                     >

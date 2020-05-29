@@ -11,10 +11,8 @@
 |
 */
 
-/*Route::get('/', function () {
-    //return view('site');
-});*/
-Route::get('/', 'Site\SiteController@index')->name('home');
+Route::get('/', 'Site\SiteController@index')->name('site');
+Route::get('/artigo/{id}/{titulo?}', 'Site\SiteController@artigoDetalhes')->name('artigo');
 
 Auth::routes();
 
