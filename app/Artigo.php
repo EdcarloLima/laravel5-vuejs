@@ -35,4 +35,14 @@ class Artigo extends Model
             ->whereNull('artigos.deleted_at')
             ->paginate($paginate);
     }
+
+    public function listarArtigosSite(int $paginate)
+    {
+        return $this->select(['artigos.id','artigos.titulo','artigos.descricao','users.name as autor','artigos.data'])
+            ->join('users', 'artigos.user_id', 'users.id')
+            ->whereNull('artigos.deleted_at')
+            ->whereDate('artigos.data','<=',date('Y-m-d'))
+            ->orderByDesc('artigos.data')
+            ->paginate($paginate);
+    }
 }

@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('site');
-});
+/*Route::get('/', function () {
+    //return view('site');
+});*/
+Route::get('/', 'Site\SiteController@index')->name('home');
 
 Auth::routes();
 
