@@ -19,7 +19,7 @@
                     criar="#criar" detalhe="/admin/autores/" editar="/admin/autores/"  modal="sim"
             ></tabela-lista>
             <div align="center">
-                {{$listaAutores->links()}}
+                {{$listaAutores}}
             </div>
         </painel>
     </pagina>

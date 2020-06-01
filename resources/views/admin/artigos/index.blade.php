@@ -19,7 +19,7 @@
                     criar="#criar" detalhe="/admin/artigos/" editar="/admin/artigos/" deletar="/admin/artigos/" token="{{csrf_token()}}" modal="sim"
             ></tabela-lista>
             <div align="center">
-                {{$listaArtigos->links()}}
+                {{$listaArtigos}}
             </div>
         </painel>
     </pagina>

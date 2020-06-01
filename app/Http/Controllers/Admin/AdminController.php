@@ -18,11 +18,11 @@ class AdminController extends Controller
     {
         $listaMigalhas = json_encode([
             ["titulo" => "Admin", "url" => route('admin')],
-            ["titulo" => "Lista de Autores", "url" => ""]
+            ["titulo" => "Lista de Administradores", "url" => ""]
         ]);
         $usuario = new User();
-        $listaAutores = $usuario->select('id','name','email')->where('autor','S')->paginate(5);
-        return response()->view('admin.autores.index', compact('listaMigalhas','listaAutores'));
+        $listaAdmins = $usuario->select(['id','name','email'])->where('admin','S')->paginate(5);
+        return response()->view('admin.adm.index', compact('listaMigalhas','listaAdmins'));
     }
 
     /**

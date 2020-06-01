@@ -32,7 +32,8 @@ class AdminController extends Controller
         $usuario = new User();
         $qtdUsuarios = $usuario->count();
         $qtdAutores = $usuario->where('autor','S')->count();
+        $qtdAdmins = $usuario->where('admin','S')->count();
         $qtdArtigos = $artigo->getQuantidade();
-        return response()->view('admin', compact('listaMigalhas','qtdUsuarios','qtdAutores','qtdArtigos'));
+        return response()->view('admin', compact('listaMigalhas','qtdUsuarios','qtdAutores','qtdArtigos','qtdAdmins'));
     }
 }
