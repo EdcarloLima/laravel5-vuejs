@@ -71,9 +71,9 @@ class ArtigosController extends Controller
      */
     public function show($id)
     {
-        $artigo = new Artigo();
-        $artigo = $artigo->find($id);
-        $artigo->data = $artigo->getDateFormatLocal($artigo->data);
+        $art = new Artigo();
+        $artigo = $art->find($id);
+        $artigo->data = $art->getDate($artigo->data);
         return $artigo;
     }
 

@@ -40,6 +40,17 @@ class Artigo extends Model
         return ($exibirHora) ? $dataBr.' '.$hora : $dataBr;
     }
 
+    public function getDate(string $dataSql) : string
+    {
+        $data = '';
+        if (strlen($dataSql) > 10) {
+            $dt = explode(' ', $dataSql);
+            $data = $dt[0];
+        } else
+            $data = $dataSql;
+        return $data;
+    }
+
     public function getQuantidade() : int
     {
         return $this->count();
