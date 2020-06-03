@@ -11,8 +11,8 @@ class SiteController extends Controller
 {
     public function index()
     {
-        $artigo = new Artigo();
-        $lista = $artigo->listarArtigosSite(3);
+        $art = new Artigo();
+        $lista = $art->listarArtigosSite(3);
         return response()->view('site',compact('lista'));
     }
 
@@ -26,5 +26,19 @@ class SiteController extends Controller
         }
 
         return response()->redirectToRoute('site');
+    }
+
+    public function buscarArtigos(Request $request)
+    {
+        $art = new Artigo();
+        $busca = $request->busca;
+        if (!empty($busca)) {
+            $lista = $art->buscarArtigosSite($busca,3);
+        } else {
+            $lista = $art->listarArtigosSite(3);
+            $busca = '';
+        }
+
+        return response()->view('site',compact('lista','busca'));
     }
 }

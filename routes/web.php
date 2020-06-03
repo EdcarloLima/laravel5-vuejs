@@ -13,6 +13,7 @@
 
 Route::get('/', 'Site\SiteController@index')->name('site');
 Route::get('/artigo/{id}/{titulo?}', 'Site\SiteController@artigoDetalhes')->name('artigo');
+Route::get('/pesquisa', 'Site\SiteController@buscarArtigos')->name('site-pesquisa');
 
 Auth::routes();
 

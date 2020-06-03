@@ -75,4 +75,18 @@ class Artigo extends Model
             ->orderByDesc('artigos.data')
             ->paginate($paginate);
     }
+
+    public function buscarArtigosSite(string $busca, int $paginate)
+    {
+        return $this->select(['artigos.id','artigos.titulo','artigos.descricao','users.name as autor',
+            DB::raw("date_format(artigos.data,'%Y-%m-%d') as data")])
+            ->join('users', 'artigos.user_id', 'users.id')
+            ->whereNull('artigos.deleted_at')
+            ->whereDate('artigos.data','<=',date('Y-m-d'))
+            ->where(function ($query) use ($busca){
+                $query->orWhere('artigos.titulo','like',"%$busca%")->orWhere('artigos.descricao','like',"%$busca%");
+            })
+            ->orderByDesc('artigos.data')
+            ->paginate($paginate);
+    }
 }

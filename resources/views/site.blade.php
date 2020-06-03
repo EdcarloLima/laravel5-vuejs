@@ -3,6 +3,12 @@
 @section('content')
     <pagina tamanho="12">
         <painel titulo="Artigos">
+            <p>
+                <form class="form-inline text-center" action="{{route('site-pesquisa')}}" method="get">
+                    <input type="search" class="form-control" name="busca" placeholder="Buscar" value="{{(isset($busca)) ? $busca : ''}}">
+                    <button class="btn btn-info">Buscar</button>
+                </form>
+            </p>
             <div class="row">
                 @foreach($lista as $key => $value)
                     <artigocard
