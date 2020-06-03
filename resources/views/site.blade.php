@@ -6,8 +6,8 @@
             <div class="row">
                 @foreach($lista as $key => $value)
                     <artigocard
-                    titulo="{{$value->titulo}}"
-                    descricao="{{$value->descricao}}"
+                    titulo="{{str_limit($value->titulo,25,'...')}}"
+                    descricao="{{str_limit($value->descricao,40,'...')}}"
                     data="{{$value->data}}"
                     autor="{{$value->autor}}"
                     imagem="{{asset('img/coffee-dev.jpg')}}"
