@@ -58,10 +58,15 @@ class Artigo extends Model
 
     public function listarArtigos(int $paginate)
     {
-        return $this->select(['artigos.id','artigos.titulo','artigos.descricao','users.name',
+        $user = auth()->user();
+        $select = $this->select(['artigos.id','artigos.titulo','artigos.descricao','users.name',
             DB::raw("date_format(artigos.data,'%Y-%m-%d') as data")])
             ->join('users', 'artigos.user_id', 'users.id')
-            ->whereNull('artigos.deleted_at')
+            ->whereNull('artigos.deleted_at');
+        if ($user->admin == 'N')
+            $select->where('artigos.user_id',$user->id);
+
+        return $select->orderByDesc('artigos.id')
             ->paginate($paginate);
     }
 

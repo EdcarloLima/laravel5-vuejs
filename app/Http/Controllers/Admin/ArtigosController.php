@@ -48,7 +48,6 @@ class ArtigosController extends Controller
      */
     public function store(Request $request)
     {
-        $artigo = new Artigo();
         $dados = $request->all();
         $validacao = \Validator::make($dados,[
             "titulo" => "required",
@@ -59,7 +58,10 @@ class ArtigosController extends Controller
         if ($validacao->fails()) {
             return redirect()->back()->withErrors($validacao)->withInput();
         }
-        $artigo->create($dados);
+
+        $user = auth()->user();
+        $user->artigos()->create($dados);
+
         return response()->redirectToRoute('artigos.index');
     }
 
@@ -97,7 +99,6 @@ class ArtigosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $artigo = new Artigo();
         $dados = $request->all();
         $validacao = \Validator::make($dados,[
             "titulo" => "required",
@@ -108,7 +109,8 @@ class ArtigosController extends Controller
         if ($validacao->fails()) {
             return redirect()->back()->withErrors($validacao)->withInput();
         }
-        $artigo->find($id)->update($dados);
+        $user = auth()->user();
+        $user->artigos()->find($id)->update($dados);
         return response()->redirectToRoute('artigos.index');
     }
 
